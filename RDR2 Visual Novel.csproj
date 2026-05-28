@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E17F3D5F-19AF-459C-AAC6-BAD2DB90E330}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>RDR2_Visual_Novel</RootNamespace>
+    <AssemblyName>RDR2 Visual Novel</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormContinue.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormContinue.Designer.cs">
+      <DependentUpon>FormContinue.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormNewGame.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormNewGame.Designer.cs">
+      <DependentUpon>FormNewGame.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormSettings.Designer.cs">
+      <DependentUpon>FormSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormContinue.resx">
+      <DependentUpon>FormContinue.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormNewGame.resx">
+      <DependentUpon>FormNewGame.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormSettings.resx">
+      <DependentUpon>FormSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\harta.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="AxWMPLib">
+      <Guid>{6BF52A50-394A-11D3-B153-00C04F79FAA6}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>aximp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+    <COMReference Include="WMPLib">
+      <Guid>{6BF52A50-394A-11D3-B153-00C04F79FAA6}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\WhatsApp Video 2026-05-12 at 18.25.12.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\WhatsApp Video 2026-05-12 at 18.26.05.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\WhatsApp Video 2026-05-12 at 18.41.27.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\WhatsApp Video 2026-05-12 at 18.53.26.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hai.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\Arthur+Horse1.png" />
+    <Content Include="Resources\Arthur+Horse3.png" />
+    <Content Include="Resources\banca.png" />
+    <Content Include="Resources\bar.png" />
+    <Content Include="Resources\bar2.png" />
+    <Content Include="Resources\barman 3.png" />
+    <Content Include="Resources\barman.png" />
+    <Content Include="Resources\barman2.png" />
+    <Content Include="Resources\Bill1.png" />
+    <None Include="Resources\Bill11.png" />
+    <Content Include="Resources\bj.png" />
+    <Content Include="Resources\dutch.png" />
+    <Content Include="Resources\emerald.png" />
+    <Content Include="Resources\fence.png" />
+    <Content Include="Resources\ft.png" />
+    <Content Include="Resources\IMG_2747.PNG" />
+    <Content Include="Resources\IMG_2748.PNG" />
+    <Content Include="Resources\IMG_2752.PNG" />
+    <Content Include="Resources\IMG_2757.PNG" />
+    <Content Include="Resources\IMG_2760.PNG" />
+    <Content Include="Resources\IMG_2763.PNG" />
+    <Content Include="Resources\IMG_2767.PNG" />
+    <Content Include="Resources\IMG_2770.PNG" />
+    <Content Include="Resources\IMG_2773.PNG" />
+    <Content Include="Resources\IMG_2776.PNG" />
+    <Content Include="Resources\IMG_2779.PNG" />
+    <Content Include="Resources\IMG_2782.PNG" />
+    <Content Include="Resources\IMG_2786.PNG" />
+    <Content Include="Resources\IMG_2788.PNG" />
+    <Content Include="Resources\IMG_2791.PNG" />
+    <Content Include="Resources\intrare.png" />
+    <Content Include="Resources\Lenny1.png" />
+    <Content Include="Resources\Lenny2.png" />
+    <Content Include="Resources\magazin r.png" />
+    <Content Include="Resources\magazin v.png" />
+    <Content Include="Resources\Mary1.png" />
+    <Content Include="Resources\Mary2.png" />
+    <Content Include="Resources\pearson.png" />
+    <Content Include="Resources\rhodes.png" />
+    <Content Include="Resources\salon.png" />
+    <Content Include="Resources\salon2.png" />
+    <Content Include="Resources\salon3.png" />
+    <Content Include="Resources\unchiu dutch.jpeg" />
+    <Content Include="Resources\valentine.png" />
+    <None Include="Resources\valentine1.png" />
+    <Content Include="Resources\vanzator1.png" />
+    <Content Include="Resources\vanzator2.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
