@@ -1,4 +1,4 @@
-﻿using AxWMPLib;
+using AxWMPLib;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -40,9 +40,12 @@ namespace RDR2_Visual_Novel
             // 4. Îi spunem ce video să ruleze (pune calea TA exactă între ghilimele)
             // ATENȚIE: Lasă simbolul @ în fața ghilimelelor, este necesar pentru căile din Windows!
             axWindowsMediaPlayer1.URL = @"D:\cursuri si lectii\POO\Visual Novel\meniu.mp4";
-           
-        }
 
+        }
+        public void SetVolume(int volume)
+        {
+            axWindowsMediaPlayer1.settings.volume = volume;
+        }
         private void axWindowsMediaPlayer1_Enter(object sender, EventArgs e)
         {
            
@@ -68,14 +71,42 @@ namespace RDR2_Visual_Novel
 
         private void btnContinue_Click(object sender, EventArgs e)
         {
-            FormContinue continueForm = new FormContinue();
-            continueForm.ShowDialog();
-        }
+            // 1. Verificăm dacă există fizic fișierul de salvare pe calculator
+            if (System.IO.File.Exists("salvare.txt"))
+            {
+                try
+                {
+                    // 2. Citim numărul salvat în fișier
+                    string textSalvat = System.IO.File.ReadAllText("salvare.txt");
+                    int pasSalvat = int.Parse(textSalvat);
 
-        private void btnSetari_Click(object sender, EventArgs e)
-        {
-            FormSettings settingsForm = new FormSettings();
-            settingsForm.ShowDialog();
+                    // 3. Creăm o instanță nouă pentru fereastra de joc
+                    FormNewGame joculMeu = new FormNewGame();
+
+                    // 4. Îi injectăm pasul salvat ÎNAINTE ca fereastra să se încarce pe ecran!
+                    joculMeu.pasPoveste = pasSalvat;
+
+                    // 5. Oprim muzica meniului și ascundem meniul principal
+                    axWindowsMediaPlayer1.Ctlcontrols.stop();
+                    this.Hide();
+
+                    // 6. Deschidem jocul. Când se va încărca, va vedea noul pas și va sări direct la el
+                    joculMeu.ShowDialog();
+
+                    // 7. Când jucătorul va închide jocul și va reveni în meniu, reafișăm meniul principal
+                    this.Show();
+                    axWindowsMediaPlayer1.Ctlcontrols.play();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Fișierul de salvare este corupt sau nu poate fi citit: " + ex.Message, "Eroare", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                // Dacă fișierul nu există (jocul nu a fost salvat niciodată)
+                MessageBox.Show("Nu există nicio salvare anterioară! Apasă pe 'New Game' pentru a începe o poveste nouă.", "Fără Salvare", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         private void btnExit_Click(object sender, EventArgs e)
