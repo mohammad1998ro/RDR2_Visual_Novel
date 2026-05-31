@@ -71,41 +71,39 @@ namespace RDR2_Visual_Novel
 
         private void btnContinue_Click(object sender, EventArgs e)
         {
-            // 1. Verificăm dacă există fizic fișierul de salvare pe calculator
             if (System.IO.File.Exists("salvare.txt"))
             {
                 try
                 {
-                    // 2. Citim numărul salvat în fișier
-                    string textSalvat = System.IO.File.ReadAllText("salvare.txt");
-                    int pasSalvat = int.Parse(textSalvat);
+                    // Folosim ReadAllLines pentru a citi fișierul rând cu rând într-o listă (array)
+                    string[] liniiSalvate = System.IO.File.ReadAllLines("salvare.txt");
 
-                    // 3. Creăm o instanță nouă pentru fereastra de joc
+                    // Extragem datele: prima linie [0] e pasul, a doua linie [1] e aprecierea
+                    int pasSalvat = int.Parse(liniiSalvate[0]);
+                    int apreciereSalvata = int.Parse(liniiSalvate[1]);
+
                     FormNewGame joculMeu = new FormNewGame();
 
-                    // 4. Îi injectăm pasul salvat ÎNAINTE ca fereastra să se încarce pe ecran!
+                    // Injectăm AMBELE valori salvate în jocul nou
                     joculMeu.pasPoveste = pasSalvat;
+                    joculMeu.apreciereGang = apreciereSalvata;
 
-                    // 5. Oprim muzica meniului și ascundem meniul principal
                     axWindowsMediaPlayer1.Ctlcontrols.stop();
                     this.Hide();
 
-                    // 6. Deschidem jocul. Când se va încărca, va vedea noul pas și va sări direct la el
                     joculMeu.ShowDialog();
 
-                    // 7. Când jucătorul va închide jocul și va reveni în meniu, reafișăm meniul principal
                     this.Show();
                     axWindowsMediaPlayer1.Ctlcontrols.play();
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Fișierul de salvare este corupt sau nu poate fi citit: " + ex.Message, "Eroare", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Fișierul de salvare este corupt sau formatul este greșit: " + ex.Message, "Eroare", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             else
             {
-                // Dacă fișierul nu există (jocul nu a fost salvat niciodată)
-                MessageBox.Show("Nu există nicio salvare anterioară! Apasă pe 'New Game' pentru a începe o poveste nouă.", "Fără Salvare", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Nu există nicio salvare anterioară!", "Fără Salvare", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
