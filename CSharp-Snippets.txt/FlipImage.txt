@@ -1,1 +1,11 @@
+// This code flips the image horizontally before displaying it in the PictureBox. It is useful for reusing the same character sprite while changing its facing direction without creating a separate mirrored image file.
 
+case 1:
+
+    Image img = Properties.Resources.Character1;
+
+    img.RotateFlip(RotateFlipType.RotateNoneFlipX);
+
+    pictureBox1.Image = img;
+
+    break;
