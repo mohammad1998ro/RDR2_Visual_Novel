@@ -1,0 +1,24 @@
+[RO] Raport scurt: Funcționalitatea Save/Load
+
+În cadrul proiectului RDR2 Visual Novel a fost implementat un sistem de salvare și încărcare a progresului jocului. Această funcționalitate permite jucătorului să își păstreze starea curentă a jocului și să continue aventura din punctul în care a rămas.
+
+Sistemul utilizează un fișier text numit „salvare.txt”, în care sunt stocate informațiile esențiale ale jocului. În versiunea actuală, sunt salvate două valori: poziția curentă în poveste (pasPoveste) și nivelul de apreciere al gangului (apreciereGang).
+
+La apăsarea butonului Save, aplicația scrie aceste informații în fișier folosind metodele din biblioteca System.IO. La apăsarea butonului Load, datele sunt citite din fișier, iar starea jocului este restaurată. După încărcare, interfața și scena curentă sunt actualizate automat pentru a reflecta progresul salvat.
+
+Implementarea include și tratarea excepțiilor prin blocuri try-catch, asigurând o funcționare stabilă și afișarea mesajelor de eroare în cazul unor probleme la citirea sau scrierea fișierului.
+
+Această funcționalitate îmbunătățește experiența utilizatorului și reprezintă un exemplu practic de utilizare a operațiilor de intrare/ieșire (File I/O) în limbajul C#.
+
+
+[EN] Short Report: Save/Load Functionality
+
+A save and load system was implemented in the RDR2 Visual Novel project. This functionality allows the player to preserve the current game state and continue the adventure from the point where it was previously interrupted.
+
+The system uses a text file named “salvare.txt” to store essential game information. In the current version, two values are saved: the current story position (pasPoveste) and the gang appreciation level (apreciereGang).
+
+When the Save button is pressed, the application writes these values to the file using methods from the System.IO library. When the Load button is pressed, the saved data is read from the file and the game state is restored. After loading, the interface and current scene are automatically updated to reflect the stored progress.
+
+The implementation also includes exception handling through try-catch blocks, ensuring stable operation and displaying appropriate error messages whenever file reading or writing issues occur.
+
+This functionality improves the user experience and serves as a practical example of File I/O operations in C#.
