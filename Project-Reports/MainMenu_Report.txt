@@ -1,0 +1,25 @@
+[RO] Raport scurt: Sistemul Main Menu
+
+În cadrul proiectului RDR2 Visual Novel, formularul principal (Form1) funcționează ca meniul principal al jocului. Acesta reprezintă primul ecran cu care interacționează utilizatorul și oferă acces la funcționalitățile esențiale ale aplicației.
+
+Meniul principal include opțiuni pentru începerea unui joc nou, continuarea unei partide salvate anterior și închiderea aplicației. Prin intermediul acestor opțiuni, utilizatorul poate controla fluxul general al jocului într-un mod intuitiv și organizat.
+
+Pentru a crea o experiență vizuală mai atractivă, meniul utilizează un videoclip de fundal redat automat prin componenta Windows Media Player. Videoclipul este configurat să ruleze în buclă și fără sunet, având rolul de element grafic decorativ pentru interfața principală.
+
+Atunci când utilizatorul selectează opțiunea „New Game”, meniul principal este ascuns temporar, iar formularul care conține jocul propriu-zis este afișat. După închiderea jocului, meniul principal reapare automat.
+
+Prin această implementare, meniul principal acționează ca punct central de navigare al aplicației și contribuie la organizarea logică a componentelor proiectului.
+
+
+
+[EN] Short Report: Main Menu System
+
+In the RDR2 Visual Novel project, the main form (Form1) acts as the main menu of the game. It represents the first screen presented to the user and provides access to the essential functionalities of the application.
+
+The main menu includes options for starting a new game, continuing a previously saved session, and exiting the application. Through these options, the user can control the overall flow of the game in an intuitive and organized manner.
+
+To create a more engaging visual experience, the menu uses a background video played through the Windows Media Player component. The video is configured to loop continuously and remain muted, serving as a decorative graphical element for the interface.
+
+When the user selects the “New Game” option, the main menu is temporarily hidden and the game form is displayed. Once the game session ends, the main menu automatically reappears.
+
+Through this implementation, the main menu acts as the central navigation point of the application and contributes to the logical organization of the project components.
