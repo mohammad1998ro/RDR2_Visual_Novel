@@ -1,0 +1,18 @@
+// Change Music System
+// This code changes the background music only if the requested track
+// is different from the one currently playing.
+// It prevents unnecessary reloading and restarting of the same audio file.
+
+private void SchimbaMuzica(string calePiesa)
+{
+    if (piesaCurenta != calePiesa)
+    {
+        piesaCurenta = calePiesa;
+
+        axMuzica.URL = calePiesa;
+
+        axMuzica.settings.setMode("loop", true);
+
+        axMuzica.Ctlcontrols.play();
+    }
+}
