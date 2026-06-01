@@ -1,0 +1,12 @@
+// Open New Form
+// This code creates a new instance of a form and displays it as a modal window.
+// The current form is hidden while the new form is active.
+// After the new form closes, the original form is shown again.
+
+FormNewGame joculMeu = new FormNewGame();
+
+this.Hide();
+
+joculMeu.ShowDialog();
+
+this.Show();
