@@ -1,4 +1,4 @@
-}
+
 # RDR2 Visual Novel
 
 ## English Version
@@ -130,4 +130,4 @@ Aceste valori permit jucătorului să salveze progresul și să continue poveste
 
 ## Scop educațional
 
-Acest proiect demonstrează mai multe concepte importante de programare, precum programarea orientată pe evenimente, operațiile cu fișiere, logica condițională, actualizarea interfeței grafice, integrarea elementelor multimedia și gestionarea stării jocului
+Acest proiect demonstrează mai multe concepte importante de programare, precum programarea orientată pe evenimente, operațiile cu fișiere, logica condițională, actualizarea interfeței grafice, integrarea elementelor multimedia și gestionarea stării jocului.
