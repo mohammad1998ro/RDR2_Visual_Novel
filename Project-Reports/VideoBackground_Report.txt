@@ -1,0 +1,25 @@
+[RO] Raport scurt: Sistemul Video Background
+
+În cadrul proiectului RDR2 Visual Novel a fost implementat un sistem de fundal video pentru meniul principal al aplicației. Scopul acestei funcționalități este îmbunătățirea experienței vizuale și crearea unei atmosfere specifice universului Red Dead Redemption 2 încă din primul moment al interacțiunii utilizatorului cu jocul.
+
+Pentru implementare a fost utilizată componenta Windows Media Player integrată în aplicația Windows Forms. La pornirea aplicației, videoclipul de fundal este încărcat automat și redat în mod continuu.
+
+Videoclipul este configurat să ruleze în buclă (loop), fără sunet și fără afișarea controalelor standard ale playerului. Astfel, utilizatorul percepe videoclipul ca pe un element grafic al interfeței și nu ca pe un player multimedia separat.
+
+Această abordare contribuie la crearea unei interfețe moderne și immersive, oferind o prezentare mai atractivă a meniului principal și îmbunătățind experiența generală a utilizatorului.
+
+Implementarea demonstrează utilizarea componentelor multimedia în aplicațiile dezvoltate cu Windows Forms și limbajul C#.
+
+
+
+[EN] Short Report: Video Background System
+
+A video background system was implemented in the RDR2 Visual Novel project to enhance the visual experience of the main menu and create an atmosphere inspired by the Red Dead Redemption 2 universe.
+
+The implementation uses the Windows Media Player component integrated into the Windows Forms application. When the application starts, the background video is automatically loaded and played.
+
+The video is configured to run continuously in a loop, without audio and without displaying the standard media player controls. As a result, the video behaves as a visual interface element rather than a traditional media player.
+
+This approach contributes to a more immersive and modern user interface, making the main menu more visually appealing and improving the overall user experience.
+
+The implementation demonstrates the use of multimedia components within Windows Forms applications developed in C#.
