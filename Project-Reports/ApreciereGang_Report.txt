@@ -1,1 +1,16 @@
+[RO] Raport scurt: Funcționalitatea „Apreciere Gang”
 
+În cadrul proiectului RDR2 Visual Novel, a fost implementată o funcționalitate numită „Apreciere Gang”. Aceasta reprezintă un sistem simplu de evaluare a relației dintre protagonist și tabără. Valoarea este memorată în variabila apreciereGang și este afișată în interfață printr-un HUD actualizat cu metoda ActualizeazaHUD().
+
+Funcționalitatea este influențată de alegerile jucătorului. De exemplu, alegerea de a jefui trenul crește aprecierea gangului cu 10 puncte, în timp ce alegerea de a merge la vânătoare scade aprecierea cu 10 puncte. Această valoare este inclusă și în sistemul de salvare/încărcare, fiind scrisă și citită din fișierul salvare.txt.
+
+Această funcționalitate oferă jocului un element interactiv și permite ca deciziile jucătorului să aibă consecințe vizibile asupra evoluției poveștii.
+
+
+[EN] Short Report: “Apreciere Gang” Functionality
+
+In the RDR2 Visual Novel project, a functionality called “Apreciere Gang” was implemented. It represents a simple evaluation system for the relationship between the protagonist and the camp. The value is stored in the apreciereGang variable and displayed in the interface through a HUD updated by the ActualizeazaHUD() method.
+
+The functionality is affected by the player’s choices. For example, choosing to rob the train increases the gang appreciation by 10 points, while choosing to go hunting decreases it by 10 points. This value is also included in the save/load system, being written to and read from the salvare.txt file.
+
+This functionality adds an interactive element to the game and allows the player’s decisions to have visible consequences on the story progression.
