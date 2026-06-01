@@ -1,0 +1,25 @@
+[RO] Raport scurt: Funcționalitatea Continue Game
+
+În cadrul proiectului RDR2 Visual Novel a fost implementată funcționalitatea „Continue Game”, care permite utilizatorului să reia o sesiune de joc salvată anterior. Această caracteristică îmbunătățește experiența de utilizare prin eliminarea necesității de a începe jocul de la început după fiecare închidere a aplicației.
+
+La apăsarea butonului „Continue”, aplicația verifică existența fișierului de salvare „salvare.txt”. Dacă fișierul este găsit, datele sunt citite și utilizate pentru reconstruirea stării jocului. În implementarea actuală sunt restaurate poziția curentă în poveste (pasPoveste) și valoarea sistemului de apreciere a gangului (apreciereGang).
+
+După încărcarea informațiilor, este creată o nouă instanță a formularului de joc, iar valorile salvate sunt transferate către aceasta. Jocul este apoi afișat în starea corespunzătoare progresului anterior al utilizatorului.
+
+Pentru a asigura stabilitatea aplicației, funcționalitatea include verificarea existenței fișierului și tratarea excepțiilor prin blocuri try-catch. În cazul în care fișierul este inexistent sau corupt, utilizatorul primește un mesaj de avertizare sau eroare.
+
+Această funcționalitate reprezintă un exemplu practic de utilizare a operațiilor de citire a fișierelor și de restaurare a stării unei aplicații dezvoltate în C#.
+
+
+
+[EN] Short Report: Continue Game Functionality
+
+The RDR2 Visual Novel project includes a “Continue Game” functionality that allows users to resume a previously saved game session. This feature improves the user experience by eliminating the need to restart the game from the beginning after closing the application.
+
+When the “Continue” button is pressed, the application checks whether the save file named “salvare.txt” exists. If the file is found, the stored data is read and used to reconstruct the game state. In the current implementation, the restored values include the current story position (pasPoveste) and the gang appreciation value (apreciereGang).
+
+After loading the saved information, a new instance of the game form is created and the recovered values are transferred to it. The game is then displayed at the exact point where the player previously stopped.
+
+To ensure application stability, the functionality includes file existence verification and exception handling through try-catch blocks. If the save file is missing or corrupted, the user receives an appropriate warning or error message.
+
+This functionality serves as a practical example of file-reading operations and application state restoration in C#.
