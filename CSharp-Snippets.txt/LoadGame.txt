@@ -1,0 +1,30 @@
+// Load Game System
+// This code loads the saved game state from a text file.
+// It restores the current story step and the gang appreciation value.
+// After loading, the HUD and the current scene are updated.
+
+if (File.Exists("salvare.txt"))
+{
+    string[] liniiSalvate =
+        File.ReadAllLines("salvare.txt");
+
+    pasPoveste =
+        int.Parse(liniiSalvate[0]);
+
+    apreciereGang =
+        int.Parse(liniiSalvate[1]);
+
+    ActualizeazaHUD();
+
+    asteaptaAlegere = false;
+
+    btnAlegere1.Visible = false;
+    btnAlegere2.Visible = false;
+    btnAlegere3.Visible = false;
+
+    piesaCurenta = "";
+
+    axMuzica.Ctlcontrols.stop();
+
+    IncarcaScena();
+}
