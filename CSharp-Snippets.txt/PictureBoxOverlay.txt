@@ -1,0 +1,12 @@
+// PictureBox Overlay
+// This code allows character sprites and dialogue panels
+// to be displayed over a background image.
+// It creates a layered interface commonly used in Visual Novel games.
+
+pbCaracter.Parent = pbFundal;
+panelDialog.Parent = pbFundal;
+
+panelDialog.BringToFront();
+
+pbCaracter.Visible = true;
+pbCaracter.Image = Properties.Resources.Character1;
