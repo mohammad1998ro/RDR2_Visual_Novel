@@ -1,0 +1,18 @@
+// Save Game System
+// This code saves the current game state into a text file.
+// Multiple values can be stored by writing each value on a separate line.
+// The saved data can later be loaded to restore the player's progress.
+
+string dateDeSalvat =
+    pasPoveste.ToString() +
+    Environment.NewLine +
+    apreciereGang.ToString();
+
+File.WriteAllText("salvare.txt", dateDeSalvat);
+
+MessageBox.Show(
+    "Jocul a fost salvat cu succes!",
+    "Salvare",
+    MessageBoxButtons.OK,
+    MessageBoxIcon.Information
+);
