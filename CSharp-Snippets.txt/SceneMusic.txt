@@ -1,0 +1,32 @@
+// Scene Music System
+// This code assigns a different background music track to each story scene.
+// The music changes automatically when entering a new scene and loops continuously.
+// The helper method prevents the same track from being reloaded unnecessarily.
+
+case 0:
+    string caleMelodie =
+        Path.Combine(
+            Application.StartupPath,
+            "Audio",
+            "Rdr2 Ambient Music 3 Valentine.mp3"
+        );
+
+    SchimbaMuzica(caleMelodie);
+
+    pbFundal.Image = Properties.Resources.valentine;
+    lblText.Text = "Am strabatut vestul salbatic ani intregi...";
+    break;
+
+case 3:
+    string caleMelodie3 =
+        Path.Combine(
+            Application.StartupPath,
+            "Audio",
+            "Rdr2 Ambient Music 5 The Heartlands.mp3"
+        );
+
+    SchimbaMuzica(caleMelodie3);
+
+    pbFundal.Image = Properties.Resources.intrare;
+    lblText.Text = "Dupa o ora de cautare...";
+    break;
