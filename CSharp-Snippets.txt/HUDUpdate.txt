@@ -1,0 +1,17 @@
+// HUD Update System
+// This code refreshes the Heads-Up Display (HUD)
+// after the value of apreciereGang changes.
+// The HUD helps the player see the current reputation status in real time.
+
+apreciereGang += 10;
+ActualizeazaHUD();
+
+apreciereGang -= 10;
+ActualizeazaHUD();
+
+private void ActualizeazaHUD()
+{
+    lblApreciere.Text =
+        "Apreciere Gang: " +
+        apreciereGang.ToString();
+}
