@@ -1,0 +1,30 @@
+// Continue From Save
+// This code checks for an existing save file,
+// loads the saved values, and restores the game state.
+
+if (File.Exists("salvare.txt"))
+{
+    string[] liniiSalvate =
+        File.ReadAllLines("salvare.txt");
+
+    int pasSalvat =
+        int.Parse(liniiSalvate[0]);
+
+    int apreciereSalvata =
+        int.Parse(liniiSalvate[1]);
+
+    FormNewGame joculMeu =
+        new FormNewGame();
+
+    joculMeu.pasPoveste =
+        pasSalvat;
+
+    joculMeu.apreciereGang =
+        apreciereSalvata;
+
+    this.Hide();
+
+    joculMeu.ShowDialog();
+
+    this.Show();
+}
