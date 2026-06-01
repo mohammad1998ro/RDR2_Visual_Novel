@@ -1,0 +1,11 @@
+// This code implements a simple reputation system called
+// "Apreciere Gang". The value changes according to the
+// player's decisions and is displayed on the HUD.
+// It can be used to influence future story branches,
+// dialogues, or character relationships.
+
+apreciereGang += 10;
+ActualizeazaHUD();
+
+apreciereGang -= 10;
+ActualizeazaHUD();
