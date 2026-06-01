@@ -1,0 +1,24 @@
+[RO] Raport scurt: Sistemul de Branching Story
+
+În cadrul proiectului RDR2 Visual Novel a fost implementat un sistem de tip „Branching Story” (poveste ramificată), care permite jucătorului să influențeze desfășurarea evenimentelor prin alegerile sale. Această abordare transformă experiența de joc dintr-o narațiune liniară într-una interactivă, în care deciziile au consecințe directe asupra poveștii.
+
+Sistemul este bazat pe scene și puncte de decizie. În anumite momente ale jocului, jucătorului îi sunt prezentate mai multe opțiuni, fiecare conducând către o ramură diferită a narațiunii. În implementarea actuală, jucătorul poate alege între jefuirea unui tren sau participarea la o partidă de vânătoare. Fiecare alegere activează o secvență diferită de scene și influențează valorile interne ale jocului.
+
+După parcurgerea unei ramuri, povestea revine la firul principal al narațiunii. Această metodă permite dezvoltarea unor scenarii alternative fără a fragmenta complet structura jocului.
+
+Implementarea utilizează variabile dedicate pentru gestionarea alegerilor și a scenelor următoare, oferind flexibilitate pentru extinderea viitoare a poveștii. Sistemul reprezintă un exemplu practic de utilizare a logicii condiționale și a controlului fluxului de execuție în limbajul C#.
+
+Prin introducerea acestui mecanism, jocul devine mai dinamic, iar jucătorul are posibilitatea de a influența evoluția narativă și relațiile dintre personaje.
+
+
+[EN] Short Report: Branching Story System
+
+A Branching Story system was implemented in the RDR2 Visual Novel project to allow players to influence the course of events through their decisions. This approach transforms the game from a linear narrative into an interactive experience where choices have direct consequences on the story.
+
+The system is based on scenes and decision points. At specific moments in the game, the player is presented with multiple options, each leading to a different narrative branch. In the current implementation, the player can choose between robbing a train or going on a hunting expedition. Each decision activates a different sequence of scenes and affects the internal game variables.
+
+After a branch is completed, the story converges back to the main narrative path. This design allows alternative scenarios to be explored without completely fragmenting the structure of the game.
+
+The implementation relies on dedicated variables for managing player choices and determining subsequent scenes, providing flexibility for future expansion. The system serves as a practical example of conditional logic and execution flow control in C#.
+
+By introducing this mechanism, the game becomes more dynamic and gives players the ability to influence narrative progression and character relationships.
