@@ -1,0 +1,29 @@
+// Branching Choice System
+// This code allows the player to choose between multiple story paths.
+// Each button stores the target scene and redirects the story
+// to a different branch based on the player's decision.
+
+asteaptaAlegere = true;
+
+btnAlegere1.Visible = true;
+btnAlegere1.Text = "Jefuim trenul (Riscant)";
+tintaAlegere1 = 11;
+
+btnAlegere2.Visible = true;
+btnAlegere2.Text = "Mergem la vanatoare (Sigur)";
+tintaAlegere2 = 14;
+
+// Choice Selection
+// This code sends the player to the selected branch.
+
+private void btnAlegere1_Click(object sender, EventArgs e)
+{
+    pasPoveste = tintaAlegere1;
+
+    btnAlegere1.Visible = false;
+    btnAlegere2.Visible = false;
+
+    asteaptaAlegere = false;
+
+    IncarcaScena();
+}
