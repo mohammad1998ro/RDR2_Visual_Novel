@@ -1,0 +1,25 @@
+[RO] Raport scurt: Sistemul de Navigare între Formulare
+
+În cadrul proiectului RDR2 Visual Novel a fost implementat un sistem de navigare între formulare pentru a asigura o separare clară între meniul principal și interfața de joc.
+
+Aplicația utilizează două formulare principale: formularul meniului principal (Form1) și formularul care conține experiența de joc propriu-zisă (FormNewGame). Atunci când utilizatorul selectează opțiunea „New Game” sau „Continue”, aplicația creează o nouă instanță a formularului de joc și ascunde temporar meniul principal.
+
+Pentru afișarea jocului este utilizată metoda ShowDialog(), care permite rularea formularului de joc într-un mod controlat și blochează interacțiunea cu meniul principal până la închiderea sesiunii de joc.
+
+După închiderea formularului de joc, meniul principal este afișat automat din nou, oferind utilizatorului posibilitatea de a începe o nouă sesiune, de a continua jocul sau de a închide aplicația.
+
+Această abordare contribuie la organizarea logică a proiectului și facilitează separarea responsabilităților între diferitele componente ale aplicației. În plus, arhitectura permite extinderea ulterioară a proiectului prin adăugarea de noi formulare și module fără modificări majore ale structurii existente.
+
+
+
+[EN] Short Report: Navigation Between Forms System
+
+A navigation system between forms was implemented in the RDR2 Visual Novel project to provide a clear separation between the main menu and the gameplay interface.
+
+The application uses two primary forms: the main menu form (Form1) and the gameplay form (FormNewGame). When the user selects either the “New Game” or “Continue” option, the application creates a new instance of the gameplay form and temporarily hides the main menu.
+
+The gameplay form is displayed using the ShowDialog() method, which allows the game session to run in a controlled manner while preventing interaction with the main menu until the game window is closed.
+
+After the gameplay form is closed, the main menu is automatically displayed again, allowing the user to start a new game, continue another session, or exit the application.
+
+This approach improves the logical organization of the project and promotes a clear separation of responsibilities between different application components. Furthermore, the architecture supports future expansion through the addition of new forms and modules without requiring significant structural changes.
