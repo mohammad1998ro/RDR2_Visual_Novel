@@ -1,133 +1,263 @@
-
 # RDR2 Visual Novel
 
-## English Version
+## Overview
 
-## Project Overview
+RDR2 Visual Novel is a story-driven visual novel inspired by the world of Red Dead Redemption 2. The project was developed in C# using Windows Forms and combines narrative gameplay, branching choices, dynamic character reputation, background music, and external story management through JSON files.
 
-RDR2 Visual Novel is a C# Windows Forms project developed as a university assignment. The project is inspired by the atmosphere of Red Dead Redemption 2 and presents an interactive visual novel where the player follows a story, makes decisions, and influences the final outcome.
+The application allows players to interact with the story through choices that influence the outcome of the game. In addition, a dedicated Story Editor was developed to simplify story creation and modification without changing the source code.
 
-The game uses images, dialogue, background music, decision buttons, and a simple reputation system called Apreciere Gang. The player’s choices can increase or decrease the gang’s appreciation level, which later affects the ending of the story.
+---
 
-## Main Features
+## Features
 
-- Interactive visual novel story
-- Scene-based progression using pasPoveste
-- Dialogue system with character names and text
-- Background images and character sprites
-- Background music for different scenes
-- Branching story choices
-- Gang appreciation system
-- Good ending and bad ending based on player choices
-- Save and Load system using a text file
-- HUD display for the current gang appreciation value
-- Basic exception handling for file operations
+### Main Menu System
+- Video background using Windows Media Player.
+- New Game option.
+- Continue option with save-file detection.
+- Exit functionality.
 
-## Story and Gameplay
+### JSON-Based Story Engine
+- Story content is stored externally in a story.json file.
+- Each story scene is represented by a BlocPoveste object.
+- Story progression is controlled through unique block IDs.
+- New story content can be added without modifying the game code.
 
-The player begins as a protagonist wandering through the Wild West. After hearing about Dutch’s gang, the protagonist tries to join the group. In order to prove loyalty and usefulness, the player must complete different actions such as hunting or robbing people in Valentine.
+### Branching Narrative
+- Multiple player choices influence story progression.
+- Different paths lead to different outcomes.
+- Dynamic story navigation through decision targets.
 
-At certain points, the player must choose between different story paths. These choices influence the value of Apreciere Gang. A positive value can lead to acceptance into the gang, while a negative value leads to rejection.
+### Gang Appreciation System
+- Player actions modify the Apreciere Gang value.
+- Positive and negative decisions affect reputation.
+- Story endings depend on the player's accumulated reputation.
 
-## Technical Implementation
+### Dynamic Multimedia System
+- Automatic background image loading.
+- Dynamic character portrait loading.
+- Character image mirroring support.
+- Scene-specific background music.
 
-The story is controlled through a switch structure inside the IncarcaScena() method. Each case represents a different scene in the game. For every scene, the program updates:
+### Save and Load System
+- Saves the current story block ID.
+- Saves the current Gang Appreciation value.
+- Allows players to continue from the exact point where they left the game.
 
-- background image
-- character image
-- character visibility
-- dialogue name
-- dialogue text
-- background music
+### Story Editor
+A separate Windows Forms application used to:
+- Load story data from JSON files.
+- Create new story blocks.
+- Edit characters, dialogue, and backgrounds.
+- Export updated stories back to JSON.
 
-The player advances through the story by clicking on the background. When a decision is required, automatic progression stops and choice buttons become visible.
-
-## Save and Load System
-
-The game stores two important values in a text file named salvare.txt:
-
-- pasPoveste – the current story step
-- apreciereGang – the current gang appreciation value
-
-These values allow the player to save progress and continue the story later from the same point.
+---
 
 ## Technologies Used
 
 - C#
+- .NET Framework
 - Windows Forms
-- Visual Studio
-- System.IO
-- Windows Media Player component
-- GitHub for version control and documentation
-
-## Educational Purpose
-
-This project demonstrates several important programming concepts, including event-driven programming, file input/output, conditional logic, UI updates, multimedia integration, and basic game state management.
-
+- Windows Media Player Component
+- JSON Serialization (System.Text.Json)
+- Object-Oriented Programming
 
 ---
 
+## Project Structure
+
+text RDR2_Visual_Novel/ │ ├── Form1.cs ├── FormNewGame.cs ├── story.json │ ├── Models/ │   └── BlocPoveste.cs │ ├── Audio/ ├── Video/ ├── Resources/ │ └── salvare.txt  EditorPoveste/ └── Form1.cs 
+
+---
+
+## Story Architecture
+
+The story is represented using three core classes:
+
+### BlocPoveste
+Represents a story scene.
+
+Contains:
+- Character name
+- Dialogue text
+- Background image
+- Character image
+- Background music
+- Available choices
+
+### Decizie
+Represents a player choice.
+
+Contains:
+- Button text
+- Target story block
+- Reputation effect
+- Availability conditions
+
+### PovesteData
+Container class that stores all story blocks loaded from JSON.
+
+---
+
+## Educational Objectives
+
+This project demonstrates:
+- Event-driven programming
+- Data-driven game design
+- JSON serialization and deserialization
+- State management
+- User interface development
+- Multimedia integration
+- Object-oriented software architecture
+
+---
+
+## Authors
+
+MOHSENPOUR Seyedmohammadhossein
+
+LUCA Alexandru
+
+---
+
+## Future Improvements
+
+- Additional story chapters
+- More character interactions
+- Inventory system
+- Multiple save slots
+- Advanced story editor
+- Sound effects and animations
+
+---
+
+
+
 # RDR2 Visual Novel
 
-## Versiunea în limba română
+## Prezentare Generală
 
-## Prezentare generală
+RDR2 Visual Novel este un joc de tip visual novel inspirat din universul Red Dead Redemption 2. Proiectul a fost realizat în C# folosind Windows Forms și combină o poveste interactivă, alegeri ramificate, un sistem de reputație, muzică de fundal și gestionarea externă a poveștii prin fișiere JSON.
 
-RDR2 Visual Novel este un proiect realizat în C# Windows Forms pentru o temă universitară. Proiectul este inspirat de atmosfera jocului Red Dead Redemption 2 și prezintă o poveste interactivă de tip visual novel, în care jucătorul urmărește acțiunea, ia decizii și influențează finalul poveștii.
+Jucătorul poate influența desfășurarea poveștii prin deciziile sale, iar rezultatul final depinde de alegerile făcute pe parcursul jocului. În plus, a fost dezvoltat și un editor dedicat pentru modificarea poveștii fără schimbarea codului sursă.
 
-Jocul folosește imagini, dialoguri, muzică de fundal, butoane pentru alegeri și un sistem simplu de reputație numit Apreciere Gang. Alegerile jucătorului pot crește sau scădea nivelul de apreciere al gangului, iar această valoare influențează finalul jocului.
+---
 
-## Funcționalități principale
+## Funcționalități
 
-- Poveste interactivă de tip visual novel
-- Progresie pe scene folosind variabila pasPoveste
-- Sistem de dialog cu nume de personaje și text
-- Imagini de fundal și personaje
-- Muzică de fundal pentru scene diferite
-- Alegeri ramificate în poveste
-- Sistem de apreciere al gangului
-- Final pozitiv sau negativ în funcție de alegerile jucătorului
-- Sistem de salvare și încărcare folosind un fișier text
-- HUD pentru afișarea valorii curente de apreciere
-- Tratarea erorilor pentru operațiile cu fișiere
+### Sistem Main Menu
+- Fundal video utilizând Windows Media Player.
+- Opțiunea New Game.
+- Opțiunea Continue.
+- Funcție Exit.
 
-## Poveste și gameplay
+### Motor de Poveste Bazat pe JSON
+- Povestea este stocată într-un fișier extern story.json.
+- Fiecare scenă este reprezentată printr-un obiect BlocPoveste.
+- Navigarea prin poveste se realizează folosind identificatori unici.
+- Conținutul poate fi extins fără modificarea codului aplicației.
 
-Jucătorul începe în rolul unui protagonist care călătorește prin Vestul Sălbatic. După ce aude despre gangul lui Dutch, acesta încearcă să se alăture grupului. Pentru a demonstra că este loial și util, jucătorul trebuie să facă diferite acțiuni, precum vânătoare sau jafuri în Valentine.
+### Poveste Ramificată
+- Alegerile jucătorului influențează progresul poveștii.
+- Există mai multe trasee narative.
+- Deciziile conduc către scene diferite.
 
-În anumite momente, jucătorul trebuie să aleagă între mai multe direcții ale poveștii. Aceste alegeri modifică valoarea sistemului Apreciere Gang. O valoare pozitivă poate duce la acceptarea în gang, iar o valoare negativă poate duce la respingerea protagonistului.
+### Sistemul Apreciere Gang
+- Acțiunile jucătorului modifică valoarea reputației.
+- Deciziile pot avea efecte pozitive sau negative.
+- Finalul jocului depinde de reputația acumulată.
 
-## Implementare tehnică
+### Sistem Multimedia Dinamic
+- Încărcare automată a imaginilor de fundal.
+- Încărcare automată a personajelor.
+- Suport pentru rotirea imaginilor personajelor.
+- Muzică specifică fiecărei scene.
 
-Povestea este controlată printr-o structură switch în metoda IncarcaScena(). Fiecare case reprezintă o scenă diferită a jocului. Pentru fiecare scenă, programul actualizează:
+### Sistem Save / Load
+- Salvează ID-ul blocului curent.
+- Salvează valoarea Apreciere Gang.
+- Permite continuarea jocului din punctul exact în care a fost oprit.
 
-- imaginea de fundal
-- imaginea personajului
-- vizibilitatea personajului
-- numele personajului care vorbește
-- textul dialogului
-- muzica de fundal
+### Editor de Poveste
+Aplicația separată EditorPoveste permite:
+- Încărcarea poveștii din JSON.
+- Crearea de blocuri noi.
+- Editarea personajelor și dialogurilor.
+- Exportarea poveștii actualizate în format JSON.
 
-Jucătorul avansează în poveste prin click pe fundal. Atunci când este necesară o alegere, progresia automată se oprește, iar butoanele de alegere devin vizibile.
+---
 
-## Sistemul Save/Load
-
-Jocul salvează două valori importante într-un fișier text numit salvare.txt:
-
-- pasPoveste – pasul curent al poveștii
-- apreciereGang – valoarea curentă a aprecierii gangului
-
-Aceste valori permit jucătorului să salveze progresul și să continue povestea mai târziu din același punct.
-
-## Tehnologii utilizate
+## Tehnologii Utilizate
 
 - C#
+- .NET Framework
 - Windows Forms
-- Visual Studio
-- System.IO
-- Componenta Windows Media Player
-- GitHub pentru versionare și documentație
+- Windows Media Player Component
+- JSON Serialization (System.Text.Json)
+- Programare Orientată pe Obiecte
 
-## Scop educațional
+---
 
-Acest proiect demonstrează mai multe concepte importante de programare, precum programarea orientată pe evenimente, operațiile cu fișiere, logica condițională, actualizarea interfeței grafice, integrarea elementelor multimedia și gestionarea stării jocului.
+## Structura Proiectului
+
+text RDR2_Visual_Novel/ │ ├── Form1.cs ├── FormNewGame.cs ├── story.json │ ├── Modele/ │   └── BlocPoveste.cs │ ├── Audio/ ├── Video/ ├── Resources/ │ └── salvare.txt  EditorPoveste/ └── Form1.cs 
+
+---
+
+## Arhitectura Poveștii
+
+### BlocPoveste
+Reprezintă o scenă individuală.
+
+Conține:
+- numele personajului
+- textul dialogului
+- imaginea de fundal
+- imaginea personajului
+- muzica de fundal
+- lista deciziilor disponibile
+
+### Decizie
+Reprezintă o alegere făcută de jucător.
+
+Conține:
+- textul butonului
+- blocul țintă
+- efectul asupra reputației
+- condițiile de afișare
+
+### PovesteData
+Clasă care conține toate blocurile poveștii încărcate din JSON.
+
+---
+
+## Obiective Educaționale
+
+Proiectul demonstrează:
+- programare orientată pe evenimente
+- proiectare bazată pe date
+- serializare și deserializare JSON
+- gestionarea stării aplicației
+- dezvoltarea interfețelor grafice
+- integrarea elementelor multimedia
+- arhitectură software orientată pe obiecte
+
+---
+
+## Autori
+
+MOHSENPOUR Seyedmohammadhossein
+
+LUCA Alexandru
+
+---
+
+## Dezvoltări Viitoare
+
+- capitole suplimentare
+- mai multe interacțiuni între personaje
+- sistem de inventar
+- mai multe sloturi de salvare
+- editor de poveste avansat
+- efecte sonore și animații
+
+  
