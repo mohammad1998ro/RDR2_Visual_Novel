@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -39,13 +40,9 @@ namespace RDR2_Visual_Novel
 
             // 4. Îi spunem ce video să ruleze (pune calea TA exactă între ghilimele)
             // ATENȚIE: Lasă simbolul @ în fața ghilimelelor, este necesar pentru căile din Windows!
-            axWindowsMediaPlayer1.URL = @"D:\cursuri si lectii\POO\Visual Novel\meniu.mp4";
-
+            axWindowsMediaPlayer1.URL = Path.Combine(Application.StartupPath, "Video", "meniu.mp4");
         }
-        public void SetVolume(int volume)
-        {
-            axWindowsMediaPlayer1.settings.volume = volume;
-        }
+        
         private void axWindowsMediaPlayer1_Enter(object sender, EventArgs e)
         {
            
@@ -78,18 +75,19 @@ namespace RDR2_Visual_Novel
                     // Folosim ReadAllLines pentru a citi fișierul rând cu rând într-o listă (array)
                     string[] liniiSalvate = System.IO.File.ReadAllLines("salvare.txt");
 
-                    // Extragem datele: prima linie [0] e pasul, a doua linie [1] e aprecierea
-                    int pasSalvat = int.Parse(liniiSalvate[0]);
+                    // Extragem datele: prima linie [0] e ID-ul (text), a doua e aprecierea (număr)
+                    string pasSalvat = liniiSalvate[0];
                     int apreciereSalvata = int.Parse(liniiSalvate[1]);
 
                     FormNewGame joculMeu = new FormNewGame();
 
-                    // Injectăm AMBELE valori salvate în jocul nou
-                    joculMeu.pasPoveste = pasSalvat;
+                    // Injectăm datele în noul sistem
+                    joculMeu.blocCurentId = pasSalvat;
                     joculMeu.apreciereGang = apreciereSalvata;
 
                     axWindowsMediaPlayer1.Ctlcontrols.stop();
                     this.Hide();
+
 
                     joculMeu.ShowDialog();
 
