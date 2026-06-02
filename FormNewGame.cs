@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml;
 using System.IO;
 
 namespace RDR2_Visual_Novel
@@ -22,238 +21,676 @@ namespace RDR2_Visual_Novel
         // Aceste variabile vor stoca ce face fiecare buton în funcție de scena curentă
         private int tintaAlegere1 = 0;
         private int tintaAlegere2 = 0;
-        private int tintaAlegere3 = 0;
 
         private string piesaCurenta = ""; // Ține minte ce piesă rulează acum
         public FormNewGame()
         {
             InitializeComponent();
-            panelDialog.BackColor = Color.FromArgb(80, Color.LightGray);
-            lblText.AutoSize = true;
-            lblText.MaximumSize = new Size(panelDialog.Width - 20, 0);
+            panelDialog1.BackColor = Color.FromArgb(80, Color.LightGray);
+            lbText.AutoSize = true;
+            lbText.MaximumSize = new Size(panelDialog1.Width - 20, 0);
         }
-
-        private void FormNewGame_Load(object sender, EventArgs e)
-        {
-            pbCaracter.Parent = pbFundal;
-            panelDialog.Parent = pbFundal;
-            panelDialog.BringToFront();
-
-            // Adaugă aceste două linii pentru HUD:
-            lblApreciere.Parent = pbFundal;
-            ActualizeazaHUD();
-
-            pbCaracter.Visible = false;
-            IncarcaScena();
-        }
-        private void btnExit_Click(object sender, EventArgs e)
-        {
-            axMuzica.Ctlcontrols.stop();
-            Close();
-        }
-
-        private void pbFundal_Click(object sender, EventArgs e)
-        {
-            if (!asteaptaAlegere)
-            {
-                pasPoveste = urmatorulPas; 
-                IncarcaScena();
-            }
-        }
+        
         private void IncarcaScena()
         {
             urmatorulPas = pasPoveste + 1;
-
+            string caleMelodie = "";
             switch (pasPoveste)
             {
                 case 0: // Valentine
-                    string caleMelodie = Path.Combine(Application.StartupPath, "Audio", "Rdr2 Ambient Music 3 Valentine.mp3");
+                    caleMelodie = Path.Combine(Application.StartupPath, "Audio", "Rdr2 Ambient Music 3 Valentine.mp3");
                     SchimbaMuzica(caleMelodie);
 
-                    pbFundal.Image = Properties.Resources.valentine;
-                    pbCaracter.Visible = false;
-                    lblNume.Text = "Protagonist";
-                    lblText.Text = "Am strabatut vestul salbatic ani intregi fara niciun scop.";
+                    pbFundal1.Image = Properties.Resources.valentine;
+                    pbCaracter1.Visible = false;
+                    lbNume.Text = "Protagonist";
+                    lbText.Text = "Am strabatut vestul salbatic ani intregi fara niciun scop.";
                     break;
 
                 case 1:
-                    string caleMelodie1 = Path.Combine(Application.StartupPath, "Audio", "Rdr2 Ambient Music 3 Valentine.mp3");
-                    SchimbaMuzica(caleMelodie1);
+                    caleMelodie = Path.Combine(Application.StartupPath, "Audio", "Rdr2 Ambient Music 3 Valentine.mp3");
+                    SchimbaMuzica(caleMelodie);
 
-                    pbFundal.Image = Properties.Resources.valentine;
-                    lblNume.Text = "Protagonist";
-                    lblText.Text = "E timpul sa gasesc acel scop, sa fac parte dintr-o familie.";
+                    pbFundal1.Image = Properties.Resources.valentine;
+                    lbNume.Text = "Protagonist";
+                    lbText.Text = "E timpul sa gasesc acel scop, sa fac parte dintr-o familie.";
                     break;
 
                 case 2: // Unchiul Dutch (Afiș)
-                    string caleMelodie2 = Path.Combine(Application.StartupPath, "Audio", "Rdr2 Ambient Music 3 Valentine.mp3");
-                    SchimbaMuzica(caleMelodie2);
+                    caleMelodie = Path.Combine(Application.StartupPath, "Audio", "Rdr2 Ambient Music 3 Valentine.mp3");
+                    SchimbaMuzica(caleMelodie);
 
-                    pbFundal.Image = Properties.Resources.unchiu_dutch;
-                    lblNume.Text = "Protagonist";
-                    lblText.Text = "Hmm... Am auzit de acest gang. Sper ca ma vor accepta. O sa ma plimb prin zona pana ii gasesc.";
+                    pbFundal1.Image = Properties.Resources.unchiu_dutch;
+                    lbNume.Text = "Protagonist";
+                    lbText.Text = "Hmm... Am auzit de acest gang. Sper ca ma vor accepta. O sa ma plimb prin zona pana ii gasesc.";
                     break;
 
                 case 3: // Intrarea în tabără
-                    string caleMelodie3 = Path.Combine(Application.StartupPath, "Audio", "Rdr2 Ambient Music 5 The Heartlands.mp3");
-                    SchimbaMuzica(caleMelodie3);
+                    caleMelodie = Path.Combine(Application.StartupPath, "Audio", "Rdr2 Ambient Music 5 The Heartlands.mp3");
+                    SchimbaMuzica(caleMelodie);
 
-                    pbFundal.Image = Properties.Resources.intrare;
-                    lblNume.Text = "Protagonist";
-                    lblText.Text = "Dupa o ora de cautare, in sfarsit am ajuns aici.";
+                    pbFundal1.Image = Properties.Resources.intrare;
+                    lbNume.Text = "Protagonist";
+                    lbText.Text = "Dupa o ora de cautare, in sfarsit am ajuns aici.";
                     break;
 
                 case 4: // Apare Bill
                     // Fundalul ramane intrarea, dar îl afișăm pe Bill
-                    string caleMelodie4 = Path.Combine(Application.StartupPath, "Audio", "Rdr2 Ambient Music 5 The Heartlands.mp3");
-                    SchimbaMuzica(caleMelodie4);
-                    pbFundal.Image = Properties.Resources.intrare;
-                    pbCaracter.Visible = true;
-                    pbCaracter.Image = Properties.Resources.Bill1;
-                    lblNume.Text = "Bill";
-                    lblText.Text = "Hei! Cine esti si ce cauti aici?";
+                    caleMelodie = Path.Combine(Application.StartupPath, "Audio", "Rdr2 Ambient Music 5 The Heartlands.mp3");
+                    SchimbaMuzica(caleMelodie);
+                    pbFundal1.Image = Properties.Resources.intrare;
+                    pbCaracter1.Visible = true;
+                    pbCaracter1.Image = Properties.Resources.Bill1;
+                    lbNume.Text = "Bill";
+                    lbText.Text = "Hei! Cine esti si ce cauti aici?";
 
                 //    Image img = Properties.Resources.Bill1;
                 //    img.RotateFlip(RotateFlipType.RotateNoneFlipX);   (pentru rotatia imaginilor)
-                //    pbCaracter.Image = img;
+                //    pbCaracter1.Image = img;
 
                     break;
 
                 case 5:
-                    string caleMelodie5 = Path.Combine(Application.StartupPath, "Audio", "Rdr2 Ambient Music 5 The Heartlands.mp3");
-                    SchimbaMuzica(caleMelodie5);
-                    pbFundal.Image = Properties.Resources.intrare;
-                    pbCaracter.Visible = true;
-                    pbCaracter.Image = Properties.Resources.Bill1; // Imaginea cu Bill
-                    lblNume.Text = "Protagonist";
-                    lblText.Text = "Salut, sunt nou in oras. Am auzit de gangul vostru si as vrea sa ma alatur.";
+                    caleMelodie = Path.Combine(Application.StartupPath, "Audio", "Rdr2 Ambient Music 5 The Heartlands.mp3");
+                    SchimbaMuzica(caleMelodie);
+                    pbFundal1.Image = Properties.Resources.intrare;
+                    pbCaracter1.Visible = true;
+                    pbCaracter1.Image = Properties.Resources.Bill1; // Imaginea cu Bill
+                    lbNume.Text = "Protagonist";
+                    lbText.Text = "Salut, sunt nou in oras. Am auzit de gangul vostru si as vrea sa ma alatur.";
                     break;
 
                 case 6:
-                    string caleMelodie6 = Path.Combine(Application.StartupPath, "Audio", "Rdr2 Ambient Music 5 The Heartlands.mp3");
-                    SchimbaMuzica(caleMelodie6);
-                    pbFundal.Image = Properties.Resources.intrare;
-                    pbCaracter.Visible = true;
-                    pbCaracter.Image = Properties.Resources.Bill1;
-                    lblNume.Text = "Bill";
-                    lblText.Text = "Hmm... Nu stiu daca Dutch te va accepta. El e destul de pretentios. Hai cu mine sa vedem.";
+                    caleMelodie = Path.Combine(Application.StartupPath, "Audio", "Rdr2 Ambient Music 5 The Heartlands.mp3");
+                    SchimbaMuzica(caleMelodie);
+                    pbFundal1.Image = Properties.Resources.intrare;
+                    pbCaracter1.Visible = true;
+                    pbCaracter1.Image = Properties.Resources.Bill1;
+                    lbNume.Text = "Bill";
+                    lbText.Text = "Hmm... Nu stiu daca Dutch te va accepta. El e destul de pretentios. Hai cu mine sa vedem.";
                     break;
 
                 case 7: // Dutch în tabără
-                    string caleMelodie7 = Path.Combine(Application.StartupPath, "Audio", "Rdr2 Ambient Music 5 The Heartlands.mp3");
-                    SchimbaMuzica(caleMelodie7);
-                    pbFundal.Image = Properties.Resources.dutch;
-                    pbCaracter.Visible = true;
-                    pbCaracter.Image = Properties.Resources.Bill1;
-                    lblNume.Text = "Bill";
-                    lblText.Text = "Hei Dutch, tipul acesta vrea să se alăture.";
+                    caleMelodie = Path.Combine(Application.StartupPath, "Audio", "Rdr2 Ambient Music 5 The Heartlands.mp3");
+                    SchimbaMuzica(caleMelodie);
+                    pbFundal1.Image = Properties.Resources.dutch;
+                    pbCaracter1.Visible = true;
+                    pbCaracter1.Image = Properties.Resources.Bill1;
+                    lbNume.Text = "Bill";
+                    lbText.Text = "Hei Dutch, tipul acesta vrea să se alăture.";
                     break;
 
                 case 8:
-                    string caleMelodie8 = Path.Combine(Application.StartupPath, "Audio", "Rdr2 Ambient Music 5 The Heartlands.mp3");
-                    SchimbaMuzica(caleMelodie8);
-                    pbFundal.Image = Properties.Resources.dutch;
-                    pbCaracter.Visible = false;
-                    lblNume.Text = "Dutch";
-                    lblText.Text = "Interesant...Noi nu acceptam pe oricine in comunitatea noastra. Va trebui sa dovedesti ca meriti sa te alaturi.";
+                    caleMelodie = Path.Combine(Application.StartupPath, "Audio", "Rdr2 Ambient Music 5 The Heartlands.mp3");
+                    SchimbaMuzica(caleMelodie);
+                    pbFundal1.Image = Properties.Resources.dutch;
+                    pbCaracter1.Visible = false;
+                    lbNume.Text = "Dutch";
+                    lbText.Text = "Interesant...Noi nu acceptam pe oricine in comunitatea noastra. Va trebui sa dovedesti ca meriti sa te alaturi.";
                     break;
-                case 9:
-                    pbFundal.Image = Properties.Resources.harta;
-                    pbCaracter.Visible = false;
-                    lblNume.Text = "Arthur";
-                    lblText.Text = "Harta ne arată unde să căutăm următoarea țintă.";
+                case 9: // Valentine
+                    caleMelodie = Path.Combine(Application.StartupPath, "Audio", "Rdr2 Ambient Music 5 The Heartlands.mp3");
+                    SchimbaMuzica(caleMelodie);
+
+                    pbFundal1.Image = Properties.Resources.dutch;
+                    pbCaracter1.Visible = false;
+                    lbNume.Text = "Dutch";
+                    lbText.Text = "Arthur, vino aici o secunda!";
                     break;
+                case 10: // Valentine
+                    caleMelodie = Path.Combine(Application.StartupPath, "Audio", "Rdr2 Ambient Music 5 The Heartlands.mp3");
+                    SchimbaMuzica(caleMelodie);
 
-                case 10:
-                    pbFundal.Image = Properties.Resources.harta;
-                    pbCaracter.Visible = true;
+                    pbFundal1.Image = Properties.Resources.dutch;
+                    pbCaracter1.Visible = true;
+                    pbCaracter1.Image = Properties.Resources.IMG_2747;
+                    lbNume.Text = "Dutch";
+                    lbText.Text = "Domnul acesta vrea sa faca parte din gangul nostru. Trebuie sa ne asiguram ca este de incredere.";
+                    break;
+                case 11: // Valentine
+                    caleMelodie = Path.Combine(Application.StartupPath, "Audio", "Rdr2 Ambient Music 5 The Heartlands.mp3");
+                    SchimbaMuzica(caleMelodie);
 
+                    pbFundal1.Image = Properties.Resources.dutch;
+                    pbCaracter1.Visible = true;
+                    pbCaracter1.Image = Properties.Resources.IMG_2747;
+                    lbNume.Text = "Dutch";
+                    lbText.Text = "Bine Dutch, o fac pentru tine.";
+                    break;
+                case 12: // Valentine
+                    caleMelodie = Path.Combine(Application.StartupPath, "Audio", "Rdr2 Ambient Music 5 The Heartlands.mp3");
+                    SchimbaMuzica(caleMelodie);
+
+                    pbFundal1.Image = Properties.Resources.dutch;
+                    pbCaracter1.Visible = true;
+                    pbCaracter1.Image = Properties.Resources.IMG_2747;
+                    lbNume.Text = "Arthur";
+                    lbText.Text = "Ok durule, sa vedem de ce esti in stare.";
+                    break;
+                case 13:
+                    caleMelodie = Path.Combine(Application.StartupPath, "Audio", "Rdr2 Ambient Music 5 The Heartlands.mp3");
+                    SchimbaMuzica(caleMelodie);
+
+                    pbFundal1.Image = Properties.Resources.intrare;
+                    pbCaracter1.Visible = true;                  
                     Image img = Properties.Resources.ARTHURo;
                     img.RotateFlip(RotateFlipType.RotateNoneFlipX);
-                    pbCaracter.Image = img;
-
-                    lblNume.Text = "Dutch";
-                    lblText.Text = "Arthur, avem nevoie de bani. Jefuim trenul sau mergem la vânătoare?";
+                    pbCaracter1.Image = img;
+                    lbNume.Text = "Arthur";
+                    lbText.Text = "Cu ce vrei sa incepi pentru a ajuta gangul?";
 
                     // 1. Oprim progresia automată a poveștii
                     asteaptaAlegere = true;
 
-                    // 2. Configurăm Butonul 1 (Jefuim trenul)
-                    btnAlegere1.Visible = true;
-                    btnAlegere1.Text = "Jefuim trenul (Riscant)";
-                    tintaAlegere1 = 11; // Butonul ne va trimite pe Ramura 1
+                    // 2. Configurăm Butonul 1 (Vanatoare)
+                    btnAlegere11.Visible = true;
+                    btnAlegere11.Text = "Merg la vanatoare.";
+                    tintaAlegere1 = 14; // Butonul ne va trimite pe Ramura 1
 
-                    // 3. Configurăm Butonul 2 (Vânătoare)
-                    btnAlegere2.Visible = true;
-                    btnAlegere2.Text = "Mergem la vânătoare (Sigur)";
-                    tintaAlegere2 = 14; // Butonul ne va trimite pe Ramura 2
+                    // 3. Configurăm Butonul 2 (Jefuiesc oamenii din Valentine)
+                    btnAlegere22.Visible = true;
+                    btnAlegere22.Text = "Jefuiesc oamenii din Valentine";
+                    tintaAlegere2 = 35; // Butonul ne va trimite pe Ramura 2
 
                     break; // OBLIGATORIU: Împiedică executarea codului din case 11
 
-                // ==========================================================
-                // --- RAMURA 1 (Jefuim trenul) ---
-                // ==========================================================
-                case 11:
-                    lblNume.Text = "Arthur";
-                    lblText.Text = "Bine, Dutch. Ne mascăm și oprim trenul.";
-                    break;
-
-                case 12:
-                    lblText.Text = "A fost o luptă grea, dar ne-am întors cu buzunarele pline.";
-                    break;
-
-                case 13: // CASE-UL SPECIAL DE CONSECINȚĂ - RAMURA 1
-                         // Aplicăm decizia
-                    apreciereGang += 10;
-                    ActualizeazaHUD();
-
-                    // Informăm jucătorul
-                    lblNume.Text = "Sistem";
-                    lblText.Text = "Tabăra este fericită de pradă. (Apreciere Gang +10)";
-
-                    // Forțăm întoarcerea la povestea principală
-                    urmatorulPas = 17;
-                    break;
-
-                // ==========================================================
-                // --- RAMURA 2 (Vânătoare) ---
-                // ==========================================================
+                // --- RAMURA 1 (mergem la vanatoare) ---
                 case 14:
-                    lblNume.Text = "Arthur";
-                    lblText.Text = "Să nu atragem atenția. Voi prinde niște căprioare.";
+                    caleMelodie = Path.Combine(Application.StartupPath, "Audio", "Rdr2 Ambient Music 5 The Heartlands.mp3");
+                    SchimbaMuzica(caleMelodie);
+
+                    pbFundal1.Image = Properties.Resources.intrare;
+                    pbCaracter1.Visible = true;
+                    pbCaracter1.Image = Properties.Resources.IMG_2747;
+                    lbNume.Text = "Protagonist";
+                    lbText.Text = "Vreau sa mergem la vanatoare";
                     break;
 
                 case 15:
-                    lblText.Text = "Am adus mâncare, dar tabăra are nevoie disperată de bani, nu doar de carne.";
+                    caleMelodie = Path.Combine(Application.StartupPath, "Audio", "Rdr2 Ambient Music 5 The Heartlands.mp3");
+                    SchimbaMuzica(caleMelodie);
+
+                    pbFundal1.Image = Properties.Resources.intrare;
+                    pbCaracter1.Visible = true;
+                    pbCaracter1.Image = Properties.Resources.IMG_2747;
+                    lbNume.Text = "Arthur";
+                    lbText.Text = "Bine, sa vedem ce prinzi.";
                     break;
 
-                case 16: // CASE-UL SPECIAL DE CONSECINȚĂ - RAMURA 2
-                         // Aplicăm decizia
+                case 16:
+                    caleMelodie = Path.Combine(Application.StartupPath, "Audio", "Rdr2 ambient music 10 Cumberland forest.mp3");
+                    SchimbaMuzica(caleMelodie);
+
+                    pbFundal1.Image = Properties.Resources.harta;
+                    pbCaracter1.Visible = true;
+                    pbCaracter1.Image = Properties.Resources.Arthur_Horse1;
+                    lbNume.Text = "Protagonist";
+                    lbText.Text = "Ne plimbam prin Heartlands pana gasim niste animale.";
+                    break;
+                case 17:
+                    caleMelodie = Path.Combine(Application.StartupPath, "Audio", "Rdr2 ambient music 10 Cumberland forest.mp3");
+                    SchimbaMuzica(caleMelodie);
+                    pbFundal1.Image = Properties.Resources.vanatoare;
+                    pbCaracter1.Visible = true;
+                    pbCaracter1.Image = Properties.Resources.Arthur_Horse1;
+                    lbNume.Text = "Protagonist";
+                    lbText.Text = "Zona asta pare buna. Uite! Caprioare si iepuri.";
+                    break;
+                case 18:
+                    caleMelodie = Path.Combine(Application.StartupPath, "Audio", "Rdr2 ambient music 10 Cumberland forest.mp3");
+                    SchimbaMuzica(caleMelodie);
+
+                    pbFundal1.Image = Properties.Resources.vanatoare;
+                    pbCaracter1.Visible = true;
+                    pbCaracter1.Visible = true;
+                    pbCaracter1.Image = Properties.Resources.Arthur_Horse1;
+                    lbNume.Text = "Arthur";
+                    lbText.Text = "Ce vrei sa prindem?";
+                    // 1. Oprim progresia automată a poveștii
+                    asteaptaAlegere = true;
+                    // 2. Configurăm Butonul 1 (Caprioare)
+                    btnAlegere11.Visible = true;
+                    btnAlegere11.Text = "Caprioare.";
+                    tintaAlegere1 = 19; // Butonul ne va trimite pe Ramura 1.1
+                    // 3. Configurăm Butonul 2 (Iepuri)
+                    btnAlegere22.Visible = true;
+                    btnAlegere22.Text = "Iepuri";
+                    tintaAlegere2 = 27; // Butonul ne va trimite pe Ramura 1.2
+                    break;
+                case 19:
+                    caleMelodie = Path.Combine(Application.StartupPath, "Audio", "Rdr2 ambient music 10 Cumberland forest.mp3");
+                    SchimbaMuzica(caleMelodie);
+                    pbFundal1.Image = Properties.Resources.caprioara;
+                    pbCaracter1.Visible = true;
+                    pbCaracter1.Image = Properties.Resources.Arthur_Horse3;
+                    lbNume.Text = "Protagonist";
+                    lbText.Text = "Ne furisam prin iarba si tragem cu arcul.";
+                    break;
+                case 20:
+                    caleMelodie = Path.Combine(Application.StartupPath, "Audio", "Rdr2 ambient music 10 Cumberland forest.mp3");
+                    SchimbaMuzica(caleMelodie);
+                    pbFundal1.Image = Properties.Resources.caprioaram;
+                    pbCaracter1.Visible = false;
+                    lbNume.Text = "Protagonist";
+                    lbText.Text = "Am prins una.";
+                    break;
+                case 21:
+                    caleMelodie = Path.Combine(Application.StartupPath, "Audio", "Rdr2 ambient music 23 Cholla Springs.mp3");
+                    SchimbaMuzica(caleMelodie);
+                    pbFundal1.Image = Properties.Resources.intrare;
+                    pbCaracter1.Visible = true;
+                    pbCaracter1.Image = Properties.Resources._1;
+                    lbNume.Text = "Protagonist";
+                    lbText.Text = "Ce facem cu caprioarele?";
+                    break;
+                case 22:
+                    caleMelodie = Path.Combine(Application.StartupPath, "Audio", "Rdr2 ambient music 23 Cholla Springs.mp3");
+                    SchimbaMuzica(caleMelodie);
+                    pbFundal1.Image = Properties.Resources.intrare;
+                    pbCaracter1.Visible = true;
+                    pbCaracter1.Image = Properties.Resources._1;
+                    lbNume.Text = "Arthur";
+                    lbText.Text = "Le aducem la caruta cu mancare pentru a hrani restul gangului.";
+                    break;
+                case 23:
+                    caleMelodie = Path.Combine(Application.StartupPath, "Audio", "Rdr2 ambient music 23 Cholla Springs.mp3");
+                    SchimbaMuzica(caleMelodie);
+                    pbFundal1.Image = Properties.Resources.intrare;
+                    pbCaracter1.Visible = true;
+                    pbCaracter1.Image = Properties.Resources._1;
+                    lbNume.Text = "Arthur";
+                    lbText.Text = "Vino cu mine.";
+                    break;
+                case 24:
+                    caleMelodie = Path.Combine(Application.StartupPath, "Audio", "Rdr2 ambient music 23 Cholla Springs.mp3");
+                    SchimbaMuzica(caleMelodie);
+                    pbFundal1.Image = Properties.Resources.pearson1;
+                    pbCaracter1.Visible = true;
+                    pbCaracter1.Image = Properties.Resources.ARTHURo;
+                    Image imgg = Properties.Resources.ARTHURo;
+                    imgg.RotateFlip(RotateFlipType.RotateNoneFlipX);
+                    pbCaracter1.Image = imgg;
+
+                    lbNume.Text = "Arthur";
+                    lbText.Text = "Buna domnule Pearson. Uite ce am adus pentru tocanita.";
+                    break;
+                case 25:
+                    caleMelodie = Path.Combine(Application.StartupPath, "Audio", "Rdr2 ambient music 23 Cholla Springs.mp3");
+                    SchimbaMuzica(caleMelodie);
+                    pbFundal1.Image = Properties.Resources.pearson1;
+                    pbCaracter1.Visible = false;
+                    lbNume.Text = "Pearson";
+                    lbText.Text = "Multumesc baieti, o sa fie o tocanita fenomenala.";
+                    break;
+                case 26:
+                    caleMelodie = Path.Combine(Application.StartupPath, "Audio", "Rdr2 ambient music 23 Cholla Springs.mp3");
+                    SchimbaMuzica(caleMelodie);
+                    pbFundal1.Image = Properties.Resources.pearson1;
+                    pbCaracter1.Visible = false;
+                    lbNume.Text = "sistem";
+                    lbText.Text = "Aprecierea gangului a crescut cu +5";
+                    apreciereGang += 5;
+                    ActualizeazaHUD();
+                    urmatorulPas = 56; // Setăm următorul pas la convergență
+                    break;
+                case 27:
+                    caleMelodie = Path.Combine(Application.StartupPath, "Audio", "Rdr2 ambient music 10 Cumberland forest.mp3");
+                    SchimbaMuzica(caleMelodie);
+                    pbFundal1.Image = Properties.Resources.iepure;
+                    pbCaracter1.Visible = true;
+                    pbCaracter1.Image = Properties.Resources.Arthur_Horse3;
+                    lbNume.Text = "Protagonist";
+                    lbText.Text = "Ne furisam prin iarba si tragem cu arcul.";
+                    break;
+                case 28:
+                    caleMelodie = Path.Combine(Application.StartupPath, "Audio", "Rdr2 ambient music 10 Cumberland forest.mp3");
+                    SchimbaMuzica(caleMelodie);
+                    pbFundal1.Image = Properties.Resources.iepurem;
+                    pbCaracter1.Visible = false;
+                    lbNume.Text = "Protagonist";
+                    lbText.Text = "Am prins unul.";
+                    break;
+                case 29:
+                    caleMelodie = Path.Combine(Application.StartupPath, "Audio", "Rdr2 ambient music 23 Cholla Springs.mp3");
+                    SchimbaMuzica(caleMelodie);
+                    pbFundal1.Image = Properties.Resources.intrare;
+                    pbCaracter1.Visible = true;
+                    pbCaracter1.Image = Properties.Resources._1;
+                    lbNume.Text = "Protagonist";
+                    lbText.Text = "Ce facem cu iepurii?";
+                    break;
+                case 30:
+                    caleMelodie = Path.Combine(Application.StartupPath, "Audio", "Rdr2 ambient music 23 Cholla Springs.mp3");
+                    SchimbaMuzica(caleMelodie);
+                    pbFundal1.Image = Properties.Resources.intrare;
+                    pbCaracter1.Visible = true;
+                    pbCaracter1.Image = Properties.Resources._1;
+                    lbNume.Text = "Arthur";
+                    lbText.Text = "Ii aducem la caruta cu mancare pentru a hrani restul gangului.";
+                    break;
+                case 31:
+                    caleMelodie = Path.Combine(Application.StartupPath, "Audio", "Rdr2 ambient music 23 Cholla Springs.mp3");
+                    SchimbaMuzica(caleMelodie);
+                    pbFundal1.Image = Properties.Resources.intrare;
+                    pbCaracter1.Visible = true;
+                    pbCaracter1.Image = Properties.Resources._1;
+                    lbNume.Text = "Arthur";
+                    lbText.Text = "Vino cu mine.";
+                    break;
+                case 32:
+                    caleMelodie = Path.Combine(Application.StartupPath, "Audio", "Rdr2 ambient music 23 Cholla Springs.mp3");
+                    SchimbaMuzica(caleMelodie);
+                    pbFundal1.Image = Properties.Resources.pearson1;
+                    pbCaracter1.Visible = true;
+                    pbCaracter1.Image = Properties.Resources.ARTHURo;
+                    Image imggg = Properties.Resources.ARTHURo;
+                    imggg.RotateFlip(RotateFlipType.RotateNoneFlipX);
+                    pbCaracter1.Image = imggg;
+                    lbNume.Text = "Arthur";
+                    lbText.Text = "Buna domnule Pearson. Uite ce am adus pentru tocanita.";
+                    break;
+                case 33:
+                    caleMelodie = Path.Combine(Application.StartupPath, "Audio", "Rdr2 ambient music 23 Cholla Springs.mp3");
+                    SchimbaMuzica(caleMelodie);
+                    pbFundal1.Image = Properties.Resources.pearson1;
+                    pbCaracter1.Visible = false;
+                    lbNume.Text = "Pearson";
+                    lbText.Text = "Multumesc baieti. Hmm... Iepurele acesta pare ca era bolnav. Vom vomita cu totii daca il folosesc.";
+                    break;
+                case 34:
+                    caleMelodie = Path.Combine(Application.StartupPath, "Audio", "Rdr2 ambient music 23 Cholla Springs.mp3");
+                    SchimbaMuzica(caleMelodie);
+                    pbFundal1.Image = Properties.Resources.pearson1;
+                    pbCaracter1.Visible = false;
+                    lbNume.Text = "sistem";
+                    lbText.Text = "Aprecierea gangului a scazut cu -10";
                     apreciereGang -= 10;
                     ActualizeazaHUD();
-
-                    // Informăm jucătorul
-                    lblNume.Text = "Sistem";
-                    lblText.Text = "Lui Dutch nu i-a convenit lipsa ta de curaj. (Apreciere Gang -10)";
-
-                    // Aici nu e nevoie neapărat de urmatorulPas = 17, deoarece case 17
-                    // este oricum următorul la rând, dar îl poți lăsa pentru claritate.
-                    urmatorulPas = 17;
+                    urmatorulPas = 56; // Setăm următorul pas la convergență
                     break;
 
-                // ==========================================================
-                // --- CONVERGENȚA (Unde ramurile se întâlnesc din nou) ---
-                // ==========================================================
-                case 17:
-                    pbCaracter.Visible = false; // Ascundem personajul dacă nu mai e nevoie
-                    lblNume.Text = "Dutch";
-                    lblText.Text = "Oricum ar fi, legea e pe urmele noastre. Trebuie să ne mutăm tabăra...";
+                // --- RAMURA 2 (Vânătoare) ---
+                case 35:
+                    caleMelodie = Path.Combine(Application.StartupPath, "Audio", "Rdr2 Ambient Music 5 The HeartLands.mp3");
+                    SchimbaMuzica(caleMelodie);
+
+                    pbFundal1.Image = Properties.Resources.intrare;
+                    pbCaracter1.Visible = true;
+                    pbCaracter1.Image = Properties.Resources.IMG_2747;
+                    lbNume.Text = "Protagonist";
+                    lbText.Text = "Jefuiesc oamenii din Valentine.";
+                    break;
+
+
+                case 36:
+                    caleMelodie = Path.Combine(Application.StartupPath, "Audio", "Rdr2 Ambient Music 5 The HeartLands.mp3");
+                    SchimbaMuzica(caleMelodie);
+
+                    pbFundal1.Image = Properties.Resources.intrare;
+                    pbCaracter1.Visible = true;
+                    pbCaracter1.Image = Properties.Resources.IMG_2747;
+                    lbNume.Text = "Arthur";
+                    lbText.Text = "Ok; ai grija la oamenii legii";
+                    break;
+
+                case 37:
+                    caleMelodie = Path.Combine(Application.StartupPath, "Audio", "Red Dead Redemption 2 Official Soundtrack - Paying A Social Call.mp3");
+                    SchimbaMuzica(caleMelodie);
+
+                    pbFundal1.Image = Properties.Resources.valentine;
+                    pbCaracter1.Visible = false;
+
+                    lbNume.Text = "Protagonist";
+                    lbText.Text = "Mă plimb prin Valentine după niște ținte ușoare.";
+                    break;
+
+                case 38:
+                    caleMelodie = Path.Combine(Application.StartupPath, "Audio", "Red Dead Redemption 2 Official Soundtrack - Paying A Social Call.mp3");
+                    SchimbaMuzica(caleMelodie);
+
+                    pbFundal1.Image = Properties.Resources.strada;
+                    pbCaracter1.Visible = false;
+
+                    lbNume.Text = "Protagonist";
+                    lbText.Text = "Sunt pe strada principală.";
+                    break;
+
+                case 39:
+                    caleMelodie = Path.Combine(Application.StartupPath, "Audio", "Red Dead Redemption 2 Official Soundtrack - Paying A Social Call.mp3");
+                    SchimbaMuzica(caleMelodie);
+                    pbFundal1.Image = Properties.Resources.strada;
+                    pbCaracter1.Visible = false;
+                    lbNume.Text = "Protagonist";
+                    lbText.Text = "Pe cine sǎ jefuiesc?";
+                    // 1. Oprim progresia automată a poveștii
+                    asteaptaAlegere = true;
+                    // 2. Configurăm Butonul 1 (Oameni)
+                    btnAlegere11.Visible = true;
+                    btnAlegere11.Text = "Oameni.";
+                    tintaAlegere1 = 40; // Butonul ne va trimite pe Ramura 2.1
+                    // 3. Configurăm Butonul 2 (Magazin)
+                    btnAlegere22.Visible = true;
+                    btnAlegere22.Text = "Magazin";
+                    tintaAlegere2 = 46; // Butonul ne va trimite pe Ramura 2.2
+                    break;
+
+                case 40:
+                    caleMelodie = Path.Combine(Application.StartupPath, "Audio", "Red Dead Redemption 2 Official Soundtrack - Paying A Social Call.mp3");
+                    SchimbaMuzica(caleMelodie);
+
+                    pbFundal1.Image = Properties.Resources.alee;
+                    pbCaracter1.Visible = false;
+
+                    lbNume.Text = "Protagonist";
+                    lbText.Text = "DA-MI TOTI BANI PE CARE II AI!";
+                    break;
+
+                case 41:
+
+                    caleMelodie = Path.Combine(Application.StartupPath, "Audio", "Red Dead Redemption 2 Official Soundtrack - Paying A Social Call.mp3");
+                    SchimbaMuzica(caleMelodie);
+
+                    pbFundal1.Image = Properties.Resources.intrare;
+                    pbCaracter1.Visible = false;
+
+                    lbNume.Text = "Protagonist";
+                    lbText.Text = "Sper sǎ le placa cât am adus";
+                    break;
+                case 42:
+                    caleMelodie = Path.Combine(Application.StartupPath, "Audio", "Red Dead Redemption 2 Official Soundtrack - Paying A Social Call.mp3");
+                    SchimbaMuzica(caleMelodie);
+                    pbFundal1.Image = Properties.Resources.cutie;
+                    pbCaracter1.Visible = false;
+                    lbNume.Text = "Protagonist";
+                    lbText.Text = "Am adus banii inapoi la tabara.";
+                    break;
+                case 43:
+                    caleMelodie = Path.Combine(Application.StartupPath, "Audio", "Red Dead Redemption 2 Official Soundtrack - Paying A Social Call.mp3");
+                    SchimbaMuzica(caleMelodie);
+                    pbFundal1.Image = Properties.Resources.ft;
+                    pbCaracter1.Visible = true;
+                    pbCaracter1.Image = Properties.Resources.IMG_2752;
+                    lbNume.Text = "Dutch";
+                    lbText.Text = "Buna treaba! Nu-i mult dar e un inceput.";
+                    break;
+                case 44:
+                    caleMelodie = Path.Combine(Application.StartupPath, "Audio", "Red Dead Redemption 2 Official Soundtrack - Paying A Social Call.mp3");
+                    SchimbaMuzica(caleMelodie);
+                    pbFundal1.Image = Properties.Resources.ft;
+                    pbCaracter1.Visible = true;
+                    pbCaracter1.Image = Properties.Resources.IMG_2752;
+                    lbNume.Text = "Arthur";
+                    lbText.Text = "Este o suma modesta dar este nevoie de mult mai mult de atat.";
+                    break;
+                case 45:
+                    caleMelodie = Path.Combine(Application.StartupPath, "Audio", "Red Dead Redemption 2 Official Soundtrack - Paying A Social Call.mp3");
+                    SchimbaMuzica(caleMelodie);
+                    pbFundal1.Image = Properties.Resources.ft;
+                    pbCaracter1.Visible = false;
+                    lbNume.Text = "sistem";
+                    lbText.Text = "Aprecierea gangului a crescut cu +10";
+                    apreciereGang += 10;
+                    ActualizeazaHUD();
+                    urmatorulPas = 56; // Setăm următorul pas la convergență
+                    break;
+
+                case 46:
+                    caleMelodie = Path.Combine(Application.StartupPath, "Audio", "Red Dead Redemption 2 Official Soundtrack - Paying A Social Call.mp3");
+                    SchimbaMuzica(caleMelodie);
+                    pbFundal1.Image = Properties.Resources.magazin_v;
+                    pbCaracter1.Visible = false;
+                    lbNume.Text = "Protagonist";
+                    lbText.Text = "Jefuiesc magazinul.";
+                    break;
+                case 47:
+                    caleMelodie = Path.Combine(Application.StartupPath, "Audio", "Red Dead Redemption 2 Official Soundtrack - Paying A Social Call.mp3");
+                    SchimbaMuzica(caleMelodie);
+                    pbFundal1.Image = Properties.Resources.vanzator1;
+                    pbCaracter1.Visible = false;
+                    lbNume.Text = "Protagonist";
+                    lbText.Text = "DESCHIDE CASA DE MARCAT!";
+                    break;
+                case 48:
+                    caleMelodie = Path.Combine(Application.StartupPath, "Audio", "Red Dead Redemption 2 Official Soundtrack - Paying A Social Call.mp3");
+                    SchimbaMuzica(caleMelodie);
+                    pbFundal1.Image = Properties.Resources.vanzator1;
+                    pbCaracter1.Visible = false;
+                    lbNume.Text = "Vanzator";
+                    lbText.Text = "HA, crezi ca m-am nascut ieri? Am vazut balega de cal mai infricosatoare decat tine.";
+                    break;
+                case 49:
+                    caleMelodie = Path.Combine(Application.StartupPath, "Audio", "Red Dead Redemption 2 Official Soundtrack - Paying A Social Call.mp3");
+                    SchimbaMuzica(caleMelodie);
+                    pbFundal1.Image = Properties.Resources.vanzator1;
+                    pbCaracter1.Visible = false;
+                    lbNume.Text = "Vanzator";
+                    lbText.Text = "Mars de aici pana nu chem autoritatile";
+                    break;
+                case 50:
+                    caleMelodie = Path.Combine(Application.StartupPath, "Audio", "Red Dead Redemption 2 Official Soundtrack - Paying A Social Call.mp3");
+                    SchimbaMuzica(caleMelodie);
+                    pbFundal1.Image = Properties.Resources.npc;
+                    pbCaracter1.Visible = false;
+                    lbNume.Text = "Strain";
+                    lbText.Text = "Hei, tipul acela a incercat sa jefuiasca magazinul!";
+                    break;
+                case 51:
+                    caleMelodie = Path.Combine(Application.StartupPath, "Audio", "Red Dead Redemption 2 Official Soundtrack - Paying A Social Call.mp3");
+                    SchimbaMuzica(caleMelodie);
+                    pbFundal1.Image = Properties.Resources.serif;
+                    pbCaracter1.Visible = false;
+                    lbNume.Text = "Serif";
+                    lbText.Text = "Tu, opreste-te acolo!";
+                    break;
+                case 52:
+                    caleMelodie = Path.Combine(Application.StartupPath, "Audio", "Red Dead Redemption 2 Official Soundtrack - Paying A Social Call.mp3");
+                    SchimbaMuzica(caleMelodie);
+                    pbFundal1.Image = Properties.Resources.serif;
+                    pbCaracter1.Visible = false;
+                    lbNume.Text = "Protagonist";
+                    lbText.Text = "Ăăăă...nu.Pa!";
+                    break;
+                case 53:
+                    caleMelodie = Path.Combine(Application.StartupPath, "Audio", "Red Dead Redemption 2 Official Soundtrack - Paying A Social Call.mp3");
+                    SchimbaMuzica(caleMelodie);
+                    pbFundal1.Image = Properties.Resources.ft;
+                    pbCaracter1.Visible = false;
+                    lbNume.Text = "Protagonist";
+                    lbText.Text = "Abia am reusit sa scap dar cu mana goala.";
+                    break;
+                case 54:
+                    caleMelodie = Path.Combine(Application.StartupPath, "Audio", "Red Dead Redemption 2 Official Soundtrack - Paying A Social Call.mp3");
+                    SchimbaMuzica(caleMelodie);
+                    pbFundal1.Image = Properties.Resources.ft;
+                    pbCaracter1.Visible = true;
+                    pbCaracter1.Image = Properties.Resources._5;
+                    lbNume.Text = "Dutch";
+                    lbText.Text = "Ai creat probleme si ai venit si cu mana goala.Slabut!";
+                    break;
+                case 55:
+                    caleMelodie = Path.Combine(Application.StartupPath, "Audio", "Red Dead Redemption 2 Official Soundtrack - Paying A Social Call.mp3");
+                    SchimbaMuzica(caleMelodie);
+                    pbFundal1.Image = Properties.Resources.ft;
+                    pbCaracter1.Visible = false;
+                    lbNume.Text = "sistem";
+                    lbText.Text = "Aprecierea gangului a scazut cu -20";
+                    apreciereGang -= 20;
+                    ActualizeazaHUD();
+                    urmatorulPas = 56; // Setăm următorul pas la convergență
+                    break;
+                // CONVERGENȚA (Unde ramurile se întâlnesc din nou) 
+                case 56:
+                    caleMelodie = Path.Combine(Application.StartupPath, "Audio", "Red Dead Redemption 2 Official Soundtrack - Eastward Bound.mp3");
+                    SchimbaMuzica(caleMelodie);
+                    pbFundal1.Image = Properties.Resources.dutch;
+                    pbCaracter1.Visible = true;
+                    pbCaracter1.Image = Properties.Resources.IMG_2747;
+                    lbNume.Text = "Dutch";
+                    lbText.Text = "Ne-am consultat cu toții și am luat o decizie în privința ta...";
+                    if (apreciereGang >= 0)
+                    {
+                        urmatorulPas = 57; // Ramura: GOOD ENDING
+                    }
+                    else
+                    {
+                        urmatorulPas = 59; // Ramura: BAD ENDING
+                    }
+                    break;
+                    
+                case 57:
+                    caleMelodie = Path.Combine(Application.StartupPath, "Audio", "Red Dead Redemption 2 Official Soundtrack - Eastward Bound.mp3");
+                    SchimbaMuzica(caleMelodie);
+                    pbFundal1.Image = Properties.Resources.dutch;
+                    pbCaracter1.Visible = true;
+                    pbCaracter1.Image = Properties.Resources.IMG_2747;
+                    lbNume.Text = "Dutch";
+                    lbText.Text = "Ai dovedit că ești loial și ai potențial. De azi ești unul de-ai noștri.";
+                    break;
+                case 58:
+                    caleMelodie = Path.Combine(Application.StartupPath, "Audio", "Red Dead Redemption 2 Official Soundtrack - Eastward Bound.mp3");
+                    SchimbaMuzica(caleMelodie);
+                    pbFundal1.Image = Properties.Resources.dutch;
+                    pbCaracter1.Visible = true;
+                    pbCaracter1.Image = Properties.Resources.IMG_2747;
+                    lbNume.Text = "Arthur";
+                    lbText.Text = "Pregătește-te, avem un jaf mare planificat pentru mâine dimineață!";
+                    urmatorulPas = 61;
+                    break;
+                case 59:
+                    caleMelodie = Path.Combine(Application.StartupPath, "Audio", "Red Dead Redemption 2 Official Soundtrack - Eastward Bound.mp3");
+                    SchimbaMuzica(caleMelodie);
+                    pbFundal1.Image = Properties.Resources.dutch;
+                    pbCaracter1.Visible = true;
+                    pbCaracter1.Image = Properties.Resources.IMG_2747;
+                    lbNume.Text = "Dutch";
+                    lbText.Text = "Ne-ai adus doar probleme. Nu avem nevoie de alti bezmetici în tabără.";
+                    break;
+                case 60:
+                    caleMelodie = Path.Combine(Application.StartupPath, "Audio", "Red Dead Redemption 2 Official Soundtrack - Eastward Bound.mp3");
+                    SchimbaMuzica(caleMelodie);
+                    pbFundal1.Image = Properties.Resources.dutch;
+                    pbCaracter1.Visible = true;
+                    pbCaracter1.Image = Properties.Resources.IMG_2747;
+                    lbNume.Text = "Arthur";
+                    lbText.Text = "Ia-ți calul și dispari. Dacă te mai prindem prin preajmă, te împușcăm pe loc!";
+                    urmatorulPas = 61;
+                    break;
+                case 61:
+                    caleMelodie = Path.Combine(Application.StartupPath, "Audio", "Red Dead Redemption 2 Official Soundtrack - Eastward Bound.mp3");
+                    SchimbaMuzica(caleMelodie);
+                    pbFundal1.Image = Properties.Resources.rdr2_gangul;
+                    pbCaracter1.Visible = false;
+                    lbNume.Text = "Sistem";
+                    lbText.Text = "Thank you for playing.";
+
                     break;
 
                 default:
-                    pbCaracter.Visible = false;
-                    lblNume.Text = "Sistem";
-                    lblText.Text = ">> ACESTA ESTE UN PLACEHOLDER. JOCUL ESTE ÎN DEZVOLTARE. <<";
+                    caleMelodie = Path.Combine(Application.StartupPath, "Audio", "Red Dead Redemption 2 Official Soundtrack - Eastward Bound.mp3");
+                    SchimbaMuzica(caleMelodie);
+                    pbCaracter1.Visible = false;
+                    lbNume.Text = "Sistem";
+                    lbText.Text = ">> Ai ajuns la final sau ceva nu a mers bine. Poti inchide jocul<<";
                     break;
             }
         }
@@ -263,13 +700,19 @@ namespace RDR2_Visual_Novel
             if (piesaCurenta != calePiesa)
             {
                 piesaCurenta = calePiesa; // Actualizăm piesa curentă
-                axMuzica.URL = calePiesa; // Încărcăm fișierul MP3
-                axMuzica.settings.setMode("loop", true); // O setăm să cânte în buclă
-                axMuzica.Ctlcontrols.play(); // Pornim melodia
+                axMuzica1.URL = calePiesa; // Încărcăm fișierul MP3
+                axMuzica1.settings.setMode("loop", true); // O setăm să cânte în buclă
+                axMuzica1.Ctlcontrols.play(); // Pornim melodia
             }
         }
+        
+        private void ActualizeazaHUD()
+        {
+            // Actualizează textul label-ului cu valoarea curentă
+            lbApreciere.Text = "Apreciere Gang: " + apreciereGang.ToString();
+        }
 
-        private void btnSave_Click(object sender, EventArgs e)
+        private void btnSave1_Click_1(object sender, EventArgs e)
         {
             try
             {
@@ -287,37 +730,8 @@ namespace RDR2_Visual_Novel
                 MessageBox.Show("Eroare la salvarea jocului: " + ex.Message, "Eroare", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        private void ActualizeazaHUD()
-        {
-            // Actualizează textul label-ului cu valoarea curentă
-            lblApreciere.Text = "Apreciere Gang: " + apreciereGang.ToString();
-        }
 
-        private void btnAlegere1_Click(object sender, EventArgs e)
-        {
-            pasPoveste = tintaAlegere1;
-
-            btnAlegere1.Visible = false;
-            btnAlegere2.Visible = false;
-            btnAlegere3.Visible = false;
-            asteaptaAlegere = false;
-
-            IncarcaScena();
-        }
-
-        private void btnAlegere2_Click(object sender, EventArgs e)
-        {
-            pasPoveste = tintaAlegere2;
-
-            btnAlegere1.Visible = false;
-            btnAlegere2.Visible = false;
-            btnAlegere3.Visible = false;
-            asteaptaAlegere = false;
-
-            IncarcaScena();
-        }
-
-        private void btnLoad_Click(object sender, EventArgs e)
+        private void btnLoad1_Click_1(object sender, EventArgs e)
         {
             // Verificăm dacă fișierul de salvare există
             if (System.IO.File.Exists("salvare.txt"))
@@ -335,11 +749,11 @@ namespace RDR2_Visual_Novel
                     // Dacă jucătorul apasă Load fix când e la o alegere, trebuie să ascundem butoanele 
                     // înainte să încărcăm scena salvată (care poate fi o scenă normală de text).
                     asteaptaAlegere = false;
-                    btnAlegere1.Visible = false;
-                    btnAlegere2.Visible = false;
+                    btnAlegere11.Visible = false;
+                    btnAlegere22.Visible = false;
 
                     piesaCurenta = ""; // Îi resetăm memoria
-                    axMuzica.Ctlcontrols.stop(); // Oprim piesa veche ca să reînceapă de la 0
+                    axMuzica1.Ctlcontrols.stop(); // Oprim piesa veche ca să reînceapă de la 0
                     // Reîncărcăm scena folosind noul pasPoveste
                     IncarcaScena();
 
@@ -356,16 +770,60 @@ namespace RDR2_Visual_Novel
             }
         }
 
-        private void btnAlegere3_Click(object sender, EventArgs e)
+        private void btnExit1_Click_1(object sender, EventArgs e)
         {
-            pasPoveste = tintaAlegere3;
+            axMuzica1.Ctlcontrols.stop();
+            Close();
+        }
 
-            btnAlegere1.Visible = false;
-            btnAlegere2.Visible = false;
-            btnAlegere3.Visible = false;
+        private void pbFundal1_Click_1(object sender, EventArgs e)
+        {
+            if (!asteaptaAlegere)
+            {
+                pasPoveste = urmatorulPas;
+                IncarcaScena();
+            }
+        }
+
+        private void FormNewGame_Load_1(object sender, EventArgs e)
+        {
+            pbCaracter1.Parent = pbFundal1;
+            panelDialog1.Parent = pbFundal1;
+            panelDialog1.BringToFront();
+
+            // Adaugă aceste două linii pentru HUD:
+            lbApreciere.Parent = pbFundal1;
+            ActualizeazaHUD();
+
+            pbCaracter1.Visible = false;
+            IncarcaScena();
+        }
+
+        private void btnAlegere11_Click_1(object sender, EventArgs e)
+        {
+            pasPoveste = tintaAlegere1;
+
+            btnAlegere11.Visible = false;
+            btnAlegere22.Visible = false;
             asteaptaAlegere = false;
 
             IncarcaScena();
+        }
+
+        private void btnAlegere22_Click_1(object sender, EventArgs e)
+        {
+            pasPoveste = tintaAlegere2;
+
+            btnAlegere11.Visible = false;
+            btnAlegere22.Visible = false;
+            asteaptaAlegere = false;
+
+            IncarcaScena();
+        }
+
+        private void pbCaracter1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
